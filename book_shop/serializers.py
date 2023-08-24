@@ -13,7 +13,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         model = Author
         fields = ['id', 'first_name', 'last_name', 'product_set']
 
-    product_set = serializers.HyperlinkedRelatedField(many=True, view_name='product-detail', read_only=True)
+
 
 
 class GenreSerializer(serializers.ModelSerializer):

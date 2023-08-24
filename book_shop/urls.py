@@ -11,4 +11,5 @@ router.register('publishers', PublisherViewSet)
 
 urlpatterns = [
     path('',include(router.urls)),
+
 ]

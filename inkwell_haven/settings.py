@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,14 +45,16 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'drf_yasg',
-    
+    'corsheaders',
     'debug_toolbar',
     'django_filters',
+    'djoser',
+
 
 
     'book_shop',
+    'profiles',
 
-    'corsheaders',
 
 
 
@@ -104,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('NAME'),
         'HOST': os.getenv('HOST'),
-        'USER': os.getenv('USER'),
+        'USER': os.getenv('_username'),
         'PASSWORD': os.getenv('PASSWORD')
     }
 }
@@ -154,5 +158,22 @@ MEDIA_ROOT=BASE_DIR / MEDIA_URL
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+AUTH_USER_MODEL = 'profiles.User'
+
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+DJOSER = {
+    "user_list": ["rest_framework.permissions.IsAdminUser"]
+}
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME':    timedelta(days=1), #just for test remember to delete this line or change it to 15min (default is 5 min)
+}
 
 
