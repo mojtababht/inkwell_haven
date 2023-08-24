@@ -168,8 +168,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
 DJOSER = {
-    "user_list": ["rest_framework.permissions.IsAdminUser"]
+    "user_list": ["rest_framework.permissions.IsAdminUser"],
+    'SERIALIZERS': {
+        'current_user': 'profiles.serializers.UserSerializer',
+    }
 }
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
